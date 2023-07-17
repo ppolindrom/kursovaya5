@@ -16,73 +16,62 @@ def main():
     information = DBManager(params)
 
     while True:
-        while True:  # проверка ответа пользователя
+        user_call = input('вот что я могу показать тебе! Напиши цифру.\n'
+                          '1 - список всех компаний и количество вакансий у каждой\n'
+                          '2 - список вакансий, название компании, зп, ссылка на вакансию\n'
+                          '3 - показать среднюю зп по вакансиям\n'
+                          '4 - вакансии с зп выше среднего по всем вакансиям\n'
+                          '5 - вакансии со словом ключевому слову\n'
+                          'Для выхода введи стоп\n')
 
-            human_response = input("Могу показать список всех компаний и количество их вакансий? Да/Нет"
-                                   "\nОтвет: ")
-
-            if human_response.lower() == 'да':
-                information.get_companies_and_vacancies_count()
-                break
-
-            if human_response.lower() == 'нет':
-                break
-            else:
-                print('Неверно введен ответ на вопрос')
+        if user_call == '1':
+            information.get_companies_and_vacancies_count()
+            next_ques = input("Показать что-нибудь еще?")
+            if next_ques.lower() == 'да' or next_ques.lower() == 'lf':
                 continue
-
-        while True:
-            human_response = input("Вывести на экран список всех вакансий с указанием названия компании,"
-                                   "названия вакансии и зарплаты и ссылки на вакансию? Да/Нет"
-                                   "\nОтвет: ")
-            if human_response.lower() == 'да':
-                information.get_all_vacancies()
-                break
-            if human_response.lower() == 'нет':
-                break
             else:
-                print('Неверно введен ответ на вопрос')
-                continue
+                break
 
-        while True:
-            human_response = input("Вывести на экран среднюю зарплату по вакансиям? Да/Нет"
-                                   "\nОтвет: ")
-            if human_response.lower() == 'да':
-                information.get_avg_salary()
-                break
-            if human_response.lower() == 'нет':
-                break
+        elif user_call == '2':
+            information.get_all_vacancies()
+            next_ques = input("Показать что-нибудь еще?")
+            if next_ques.lower() == 'да' or next_ques.lower() == 'lf':
+                continue
             else:
-                print('Неверно введен ответ на вопрос')
-                continue
-
-        while True:
-            human_response = input("Вывести на экран список всех вакансий, у которых "
-                                   "зарплата выше средней по всем вакансиям? Да/Нет"
-                                   "\nОтвет: ")
-            if human_response.lower() == 'да':
-                information.get_vacancies_with_higher_salary()
                 break
-            if human_response.lower() == 'нет':
+
+
+        elif user_call == '3':
+            information.get_avg_salary()
+            next_ques = input("Показать что-нибудь еще?")
+            if next_ques.lower() == 'да' or next_ques.lower() == 'lf':
+                continue
+            else:
                 break
-            else:
-                print('Неверно введен ответ на вопрос')
-                continue
 
-        while True:
-            human_response = input("Вывести на экран список всех вакансий, в названии "
-                                   "которых содержатся слова, например “python”? Да/Нет"
-                                   "\nОтвет: ")
-            if human_response.lower() == 'да':
-                word = input("Введите слово: ")
-                information.get_vacancies_with_keyword(word)
-                exit()
-            if human_response.lower() == 'нет':
-                exit()
-            else:
-                print('Неверно введен ответ на вопрос')
+        elif user_call == '4':
+            information.get_vacancies_with_higher_salary()
+            next_ques = input("Показать что-нибудь еще?")
+            if next_ques.lower() == 'да' or next_ques.lower() == 'lf':
                 continue
+            else:
+                break
 
+        elif user_call == '5':
+            word = input("Введите ключевое слово: ")
+            information.get_vacancies_with_keyword(word)
+            next_ques = input("Показать что-нибудь еще?")
+            if next_ques.lower() == 'да' or next_ques.lower() == 'lf':
+                continue
+            else:
+                break
+
+        elif user_call == 'stop' or user_call == 'cnjg' or user_call == 'стоп':
+            break
+
+        else:
+            print('Не понимаю тебя')
+            input('Начнем снова, нажми enter')
 
 if __name__ == '__main__':
     main()
